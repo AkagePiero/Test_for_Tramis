@@ -1,0 +1,56 @@
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Date
+from models.database import Base
+
+
+class Test(Base):
+    __tablename__ = 'test'
+    
+    id = Column(Integer, primary_key=True)
+    btt = Column(String(3))
+    date_arr_jd =  Column(Date)
+    hbl= Column(String(3))
+    date_real_hbl =  Column(Date)
+    customs_post= Column(String(100))
+    date_check =  Column(Date),
+    date_create_order =  Column(Date),
+    date_get_order =  Column(Date),
+    customer= Column(String(100))
+    provider= Column(String(100))
+    invoice_number= Column(String(25))
+    broker= Column(String(25))
+    recipient= Column(String(60))
+    forwarder= Column(String(60))
+    store= Column(String(100))
+    cont_number= Column(String(100))
+    cont_type= Column(String(15))
+    del_cond= Column(String(3))
+    place_dispatch= Column(String(25))
+    country_dispatch= Column(String(25))
+    place_delivery= Column(String(50))
+    country_delivery= Column(String(25))
+    line_w= Column(String(50))
+    agent= Column(String(35))
+    goods= Column(String(100))
+    order_number= Column(String(100))
+    number_places = Column(Integer)
+    weight = Column(Float)
+    volume = Column(Float)
+    price = Column(Float)
+    spec_load_cond= Column(String(300))
+    date_ready =  Column(Date)
+    date_load =  Column(Date)
+    date_pack =  Column(Date)
+    date_enter_sea =  Column(Date)
+    consignment_number= Column(String(100))
+    date_prepare_doc =  Column(Date)
+    date_telex =  Column(Date)
+    note= Column(String(200))
+    date_send_docs =  Column(Date)
+    date_arr =  Column(Date)
+    port_name= Column(String(200))
+    date_get_doc =  Column(Date)
+    date_send_decl =  Column(Date)
+    date_iss_decl =  Column(Date)
+    decl_number= Column(String(100))
+    date_send_jd =  Column(Date)
+    date_unload =  Column(Date)
