@@ -1,6 +1,7 @@
 import csv
 import psycopg2
 
+# загрузка данных из csv в бд
 def load_data():
     con = psycopg2.connect(user="postgres",
                            password="12345",
@@ -58,14 +59,17 @@ def load_data():
                 Column['Номер декларации'],
                 Column['Дата отправки по ж/д'],
                 Column['Дата выгрузки']) for Column in dr]
-    cur.executemany("INSERT INTO test (id, btt, date_arr_jd, hbl, date_real_hbl, customs_post, date_check, date_create_order, date_get_order, customer, provider, \
-                    invoice_number, broker, recipient, forwarder, store, cont_number, cont_type, del_cond, place_dispatch, country_dispatch, place_delivery,\
-                    country_delivery, line_w, agent, goods, order_number, number_places, weight,volume,price,spec_load_cond,date_ready,date_load,date_pack,date_enter_sea,\
-                    consignment_number,date_prepare_doc,date_telex,note,date_send_docs,date_arr,port_name,date_get_doc, date_send_decl,date_iss_decl, \
-                    decl_number,date_send_jd,date_unload)\
-    VALUES (%s, %s, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, %s, %s, %s, %s, %s, %s, %s, %s,\
-            %s, %s, %s, %s, %s, %s, %s, %s, %s, NULLIF(%s, '')::int, NULLIF(%s, '')::float, NULLIF(%s, '')::float, NULLIF(%s, '')::float, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, \
-            NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, \
-            NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date);", to_db)
-    con.commit()
-    con.close()
+    try:
+        cur.executemany("INSERT INTO test (id, btt, date_arr_jd, hbl, date_real_hbl, customs_post, date_check, date_create_order, date_get_order, customer, provider, \
+                        invoice_number, broker, recipient, forwarder, store, cont_number, cont_type, del_cond, place_dispatch, country_dispatch, place_delivery,\
+                        country_delivery, line_w, agent, goods, order_number, number_places, weight,volume,price,spec_load_cond,date_ready,date_load,date_pack,date_enter_sea,\
+                        consignment_number,date_prepare_doc,date_telex,note,date_send_docs,date_arr,port_name,date_get_doc, date_send_decl,date_iss_decl, \
+                        decl_number,date_send_jd,date_unload)\
+        VALUES (%s, %s, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, %s, %s, %s, %s, %s, %s, %s, %s,\
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, NULLIF(%s, '')::int, NULLIF(%s, '')::float, NULLIF(%s, '')::float, NULLIF(%s, '')::float, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, \
+                NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date, \
+                NULLIF(%s, '')::date, %s, NULLIF(%s, '')::date, NULLIF(%s, '')::date);", to_db)
+        con.commit()
+        con.close()
+    except Exception:
+        con.rollback()

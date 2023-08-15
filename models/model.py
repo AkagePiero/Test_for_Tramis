@@ -1,7 +1,14 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float, Date
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Date, JSON
 from models.database import Base
 
-
+# класс для отработки навыков json
+class Cont(Base):
+    __tablename__ = 'cont'
+    
+    id = Column(Integer, primary_key=True)
+    cont_data= Column(JSON)
+   
+# класс для отработки навыков по работе с бд (заливка данных из csv)
 class Test(Base):
     __tablename__ = 'test'
     
@@ -54,5 +61,4 @@ class Test(Base):
     decl_number= Column(String(100))
     date_send_jd =  Column(Date, nullable=True)
     date_unload =  Column(Date, nullable=True)
-
   
